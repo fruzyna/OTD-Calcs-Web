@@ -11,14 +11,14 @@
         <form id="price-form">
           OTD: $<input type="number" name="otd"/><br>
           LT:<br>
-          <input type="radio" name="lt">New $196</input><br>
-          <input type="radio" name="lt">Transfer $122</input><br>
+          <input type="radio" name="lt" onclick="findPrice();">New $196</input><br>
+          <input type="radio" name="lt" onclick="findPrice();">Transfer $122</input><br>
           Subtotal: $<h3 id=price-subtotal1>XXX.XX</h3>
           Tax:<br>
-          <input type="radio" name="tax">Dupage 7.25%</input><br>
-          <input type="radio" name="tax">Cook 8.25%</input><br>
-          <input type="radio" name="tax">Chicago 9.50%</input><br>
-          <input type="radio" name="tax">Other</input><br>
+          <input type="radio" name="tax" onclick="findPrice();">Dupage 7.25%</input><br>
+          <input type="radio" name="tax" onclick="findPrice();">Cook 8.25%</input><br>
+          <input type="radio" name="tax" onclick="findPrice();">Chicago 9.50%</input><br>
+          <input type="radio" name="tax" onclick="findPrice();">Other</input><br>
           <input type="number" name="other-percent">%</input><br>
           Trade: $<input type="number" name="trade"/><br>
           Subtotal: $<h3 id=price-subtotal2>XXX.XX</h3>
@@ -34,14 +34,14 @@
           Trade: $<input type="number" name="trade"/><br>
           Subtotal: $<h3 id=otd-subtotal>XXX.XX</h3>
           Tax:<br>
-          <input type="radio" name="tax">Dupage 7.25%</input><br>
-          <input type="radio" name="tax">Cook 8.25%</input><br>
-          <input type="radio" name="tax">Chicago 9.50%</input><br>
-          <input type="radio" name="tax">Other</input><br>
+          <input type="radio" name="tax" onclick="findOTD();">Dupage 7.25%</input><br>
+          <input type="radio" name="tax" onclick="findOTD();">Cook 8.25%</input><br>
+          <input type="radio" name="tax" onclick="findOTD();">Chicago 9.50%</input><br>
+          <input type="radio" name="tax" onclick="findOTD();">Other</input><br>
           <input type="number" name="other-percent">%</input><br>
           LT:<br>
-          <input type="radio" name="lt">New $196</input><br>
-          <input type="radio" name="lt">Transfer $122</input><br>
+          <input type="radio" name="lt" onclick="findOTD();">New $196</input><br>
+          <input type="radio" name="lt" onclick="findOTD();">Transfer $122</input><br>
           OTD: $<h2 id=otd-total>XXX.XX</h2>
         </form>
       </div>
@@ -81,6 +81,7 @@
         findPrice();
       });
     }
+
     function otd()
     {
       document.getElementById("calcotd").style.display = 'block';
