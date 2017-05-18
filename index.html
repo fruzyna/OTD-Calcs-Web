@@ -1,0 +1,230 @@
+<html>
+  <head>
+    <title>OTD Calculator</title>
+  </head>
+  <body>
+    <h1>Liam's OTD Calculator</h1>
+    <button type="button" onclick="otd()">Calculate OTD</button>
+    <button type="button" onclick="price()">Calculate Price</button>
+    <div id="body">
+      <div id="calcprice">
+        <form id="price-form">
+          OTD: $<input type="number" name="otd"/><br>
+          LT:<br>
+          <input type="radio" name="lt">New $196</input><br>
+          <input type="radio" name="lt">Transfer $122</input><br>
+          Subtotal: $<h3 id=price-subtotal1>XXX.XX</h3>
+          Tax:<br>
+          <input type="radio" name="tax">Dupage 7.25%</input><br>
+          <input type="radio" name="tax">Cook 8.25%</input><br>
+          <input type="radio" name="tax">Chicago 9.50%</input><br>
+          <input type="radio" name="tax">Other</input><br>
+          <input type="number" name="other-percent">%</input><br>
+          Trade: $<input type="number" name="trade"/><br>
+          Subtotal: $<h3 id=price-subtotal2>XXX.XX</h3>
+          Doc: $<input type="number" name="doc"/><br>
+          Total: $<h2 id=price-total>XXX.XX</h2>
+        </form>
+      </div>
+
+      <div id="calcotd">
+        <form id="otd-form">
+          Price: $<input type="number" name="price"/><br>
+          Doc: $<input type="number" name="doc"/><br>
+          Trade: $<input type="number" name="trade"/><br>
+          Subtotal: $<h3 id=otd-subtotal>XXX.XX</h3>
+          Tax:<br>
+          <input type="radio" name="tax">Dupage 7.25%</input><br>
+          <input type="radio" name="tax">Cook 8.25%</input><br>
+          <input type="radio" name="tax">Chicago 9.50%</input><br>
+          <input type="radio" name="tax">Other</input><br>
+          <input type="number" name="other-percent">%</input><br>
+          LT:<br>
+          <input type="radio" name="lt">New $196</input><br>
+          <input type="radio" name="lt">Transfer $122</input><br>
+          OTD: $<h2 id=otd-total>XXX.XX</h2>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    start();
+    function start()
+    {
+      otd();
+
+      var form = document.getElementById("otd-form");
+      form.elements["price"].addEventListener('input', function (evt) {
+        findOTD();
+      });
+      form.elements["doc"].addEventListener('input', function (evt) {
+        findOTD();
+      });
+      form.elements["trade"].addEventListener('input', function (evt) {
+        findOTD();
+      });
+      form.elements["other-percent"].addEventListener('input', function (evt) {
+        findOTD();
+      });
+
+      var form = document.getElementById("price-form");
+      form.elements["otd"].addEventListener('input', function (evt) {
+        findPrice();
+      });
+      form.elements["doc"].addEventListener('input', function (evt) {
+        findPrice();
+      });
+      form.elements["trade"].addEventListener('input', function (evt) {
+        findPrice();
+      });
+      form.elements["other-percent"].addEventListener('input', function (evt) {
+        findPrice();
+      });
+    }
+    function otd()
+    {
+      document.getElementById("calcotd").style.display = 'block';
+      document.getElementById("calcprice").style.display = 'none';
+    }
+
+    function price()
+    {
+      document.getElementById("calcotd").style.display = 'none';
+      document.getElementById("calcprice").style.display = 'block';
+    }
+
+    function findPrice()
+    {
+      var form = document.getElementById("price-form");
+      var otd = parseFloat(form.elements["otd"].value);
+      var ltRadios = form.elements["lt"];
+      var taxRadios = form.elements["tax"];
+      var i;
+      for(i = 0; i < ltRadios.length; i++)
+      {
+        if(ltRadios[i].checked)
+        {
+          break;
+        }
+      }
+      var lt = 150;
+      switch(i)
+      {
+        case 0:
+          lt = 196;
+          break;
+        case 1:
+          lt = 122;
+          break;
+      }
+      var subtotal1 = otd - lt;
+      document.getElementById("price-subtotal1").innerHTML = subtotal1;
+      for(i = 0; i < taxRadios.length; i++)
+      {
+        if(taxRadios[i].checked)
+        {
+          break;
+        }
+      }
+      var tax = 1.0000;
+      switch(i)
+      {
+        case 0:
+          //dupage
+          tax += 0.0725;
+          break;
+        case 1:
+          //cook
+          tax += 0.0825;
+          break;
+        case 2:
+          //city
+          tax += 0.0950;
+          break;
+        case 3:
+          //other
+          var other = parseFloat(form.elements["other-percent"]);
+          if(other >= 0.5)
+          {
+            tax += other / 100;
+          }
+          else {
+            tax += other;
+          }
+          break;
+      }
+      var trade = parseFloat(form.elements["trade"].value);
+      var subtotal2 = subtotal1 / tax + trade;
+      document.getElementById("price-subtotal2").innerHTML = subtotal2;
+      var doc = parseFloat(form.elements["doc"].value);
+      var total = subtotal2 - doc;
+      document.getElementById("price-total").innerHTML = total;
+    }
+
+    function findOTD()
+    {
+      var form = document.getElementById("otd-form");
+      var price = parseFloat(form.elements["price"].value);
+      var doc = parseFloat(form.elements["doc"].value);
+      var trade = parseFloat(form.elements["trade"].value);
+      var subtotal = price + doc - trade;
+      document.getElementById("otd-subtotal").innerHTML = subtotal;
+      var taxRadios = form.elements["tax"];
+      var ltRadios = form.elements["lt"];
+      var i;
+      for(i = 0; i < taxRadios.length; i++)
+      {
+        if(taxRadios[i].checked)
+        {
+          break;
+        }
+      }
+      var tax = 1.0000;
+      switch(i)
+      {
+        case 0:
+          //dupage
+          tax += 0.0725;
+          break;
+        case 1:
+          //cook
+          tax += 0.0825;
+          break;
+        case 2:
+          //city
+          tax += 0.0950;
+          break;
+        case 3:
+          //other
+          var other = parseFloat(form.elements["other-percent"]);
+          if(other >= 0.5)
+          {
+            tax += other / 100;
+          }
+          else {
+            tax += other;
+          }
+          break;
+      }
+      for(i = 0; i < ltRadios.length; i++)
+      {
+        if(ltRadios[i].checked)
+        {
+          break;
+        }
+      }
+      var lt = 150;
+      switch(i)
+      {
+        case 0:
+          lt = 196;
+          break;
+        case 1:
+          lt = 122;
+          break;
+      }
+      var total = subtotal * tax + lt;
+      document.getElementById("otd-total").innerHTML = total;
+    }
+  </script>
+</html>
