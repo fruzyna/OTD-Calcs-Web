@@ -30,6 +30,7 @@
           <input type="radio" name="tax" onclick="findPrice();">Chicago 9.25%</input><br>
           <input type="radio" name="tax" onclick="findPrice();">Other</input><br>
           <input type="number" name="other-percent">%</input><br>
+          Tax: $<h3 id=price-tax>XXX.XX</h3><br>
           Trade: $<input type="number" name="trade"/><br>
           Subtotal: $<h3 id=price-subtotal2>XXX.XX</h3><br>
           Doc: $<input type="number" name="doc" value="197.15"/><br>
@@ -49,6 +50,7 @@
           <input type="radio" name="tax" onclick="findOTD();">Chicago 9.25%</input><br>
           <input type="radio" name="tax" onclick="findOTD();">Other</input><br>
           <input type="number" name="other-percent">%</input><br>
+          Tax: $<h3 id=otd-tax>XXX.XX</h3><br>
           LT:<br>
           <input type="radio" name="lt" onclick="findOTD();">New $196</input><br>
           <input type="radio" name="lt" onclick="findOTD();">Transfer $120</input><br>
@@ -59,5 +61,5 @@
       </div>
     </div>
   </body>
-  <script src="script.js"></script> 
+  <script src="script.js"></script>
 </html>

@@ -52,6 +52,7 @@ function price()
 
 function findPrice()
 {
+  console.log("Finding Price");
   var form = document.getElementById("price-form");
   var otd = parseFloat(form.elements["otd"].value);
   var ltRadios = form.elements["lt"];
@@ -114,6 +115,8 @@ function findPrice()
       }
       break;
   }
+  var taxTotal = subtotal1 - (subtotal1 / tax);
+  document.getElementById("price-tax").innerHTML = round(taxTotal, 2);
   var trade = parseFloat(form.elements["trade"].value);
   var subtotal2 = subtotal1 / tax + trade;
   document.getElementById("price-subtotal2").innerHTML = round(subtotal2, 2);
@@ -129,6 +132,7 @@ function round(value, decimals)
 
 function findOTD()
 {
+  console.log("Finding OTD");
   var form = document.getElementById("otd-form");
   var price = parseFloat(form.elements["price"].value);
   var doc = parseFloat(form.elements["doc"].value);
@@ -172,6 +176,8 @@ function findOTD()
       }
       break;
   }
+  var taxTotal = subtotal * (tax - 1);
+  document.getElementById("otd-tax").innerHTML = round(taxTotal, 2);
   for(i = 0; i < ltRadios.length; i++)
   {
     if(ltRadios[i].checked)
