@@ -5,60 +5,103 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <!-- Header of page includes title and tabs -->
     <div id="header">
       <div id="titlebar">
-        <h1>Liam's OTD Calculator</h1>
-      </div>
-      <div id="dropbar">
-        <button type="button" onclick="otd()">Calculate OTD</button>
-        <button type="button" onclick="price()">Calculate Price</button>
-      </div>
-    </div>
-    <div id="body">
-      <div id="calcprice">
-        <form id="price-form">
-          OTD: $<input type="number" name="otd"/><br>
-          LT:<br>
-          <input type="radio" name="lt" onclick="findPrice();">New $196</input><br>
-          <input type="radio" name="lt" onclick="findPrice();">Transfer $120</input><br>
-          <input type="radio" name="lt" onclick="findPrice();">Other</input><br>
-          $<input type="number" name="other-lt"></input><br>
-          Subtotal: $<h3 id=price-subtotal1>XXX.XX</h3><br>
-          Tax:<br>
-          <input type="radio" name="tax" onclick="findPrice();">Dupage 7.00%</input><br>
-          <input type="radio" name="tax" onclick="findPrice();">Cook 8.00%</input><br>
-          <input type="radio" name="tax" onclick="findPrice();">Chicago 9.25%</input><br>
-          <input type="radio" name="tax" onclick="findPrice();">Other</input><br>
-          <input type="number" name="other-percent">%</input><br>
-          Tax: $<h3 id=price-tax>XXX.XX</h3><br>
-          Trade: $<input type="number" name="trade"/><br>
-          Subtotal: $<h3 id=price-subtotal2>XXX.XX</h3><br>
-          Doc: $<input type="number" name="doc" value="204.81"/><br>
-          Total: $<h2 id=price-total>XXX.XX</h2><br>
-        </form>
+        <h1 id="title">Liam's OTD Calculator</h1>
       </div>
 
-      <div id="calcotd">
-        <form id="otd-form">
-          Price: $<input type="number" name="price"/><br>
-          Doc: $<input type="number" name="doc" value="204.81"/><br>
-          Trade: $<input type="number" name="trade"/><br>
-          Subtotal: $<h3 id=otd-subtotal>XXX.XX</h3><br>
-          Tax:<br>
-          <input type="radio" name="tax" onclick="findOTD();">Dupage 7.00%</input><br>
-          <input type="radio" name="tax" onclick="findOTD();">Cook 8.00%</input><br>
-          <input type="radio" name="tax" onclick="findOTD();">Chicago 9.25%</input><br>
-          <input type="radio" name="tax" onclick="findOTD();">Other</input><br>
-          <input type="number" name="other-percent">%</input><br>
-          Tax: $<h3 id=otd-tax>XXX.XX</h3><br>
-          LT:<br>
-          <input type="radio" name="lt" onclick="findOTD();">New $196</input><br>
-          <input type="radio" name="lt" onclick="findOTD();">Transfer $120</input><br>
-          <input type="radio" name="lt" onclick="findOTD();">Other</input><br>
-          $<input type="number" name="other-lt"></input><br>
-          OTD: $<h2 id=otd-total>XXX.XX</h2><br>
-        </form>
+      <div id="dropbar">
+        <span id="otd-tab" class="tab" onclick="otd()">Calculate OTD</span><span id="price-tab" class="tab" onclick="price()">Calculate Price</span>
       </div>
+    </div>
+
+    <!-- Body of page, contains all functionality -->
+    <div id="body">
+      <!-- Visible when in calculate OTD mode -->
+      <form id="otd-form">
+        <div class="row">
+          <span class="left">Price:</span><span class="right">$<input type="number" name="price"></span>
+        </div>
+        <div class="row">
+          <span class="left">Doc:</span><span class="right">$<input type="number" name="doc" value="204.81"></span>
+        </div>
+        <div class="row">
+          <span class="left">Trade:</span><span class="right">$<input type="number" name="trade"></span>
+        </div>
+        <div class="row">
+          <span class="left">Subtotal:</span><span class="right">$<h3 id=otd-subtotal>XXX.XX</h3></span>
+        </div>
+        <div class="row">
+          <span class="left">Tax:</span><span class="right">
+            <span class="radiobox">
+              <input type="radio" name="tax" onclick="findOTD();">Dupage 7.00%</input><br>
+              <input type="radio" name="tax" onclick="findOTD();">Cook 8.00%</input><br>
+              <input type="radio" name="tax" onclick="findOTD();">Chicago 9.25%</input><br>
+              <input type="radio" name="tax" onclick="findOTD();">Other</input><br>
+              <input type="number" name="other-percent">%</input>
+            </span></span>
+        </div>
+        <div class="row">
+          <span class="left">Tax:</span><span class="right">$<h3 id=otd-tax>XXX.XX</h3></span>
+        </div>
+        <div class="row">
+          <span class="left">LT:</span><span class="right">
+            <span class="radiobox">
+              <input type="radio" name="lt" onclick="findOTD();">New $196</input><br>
+              <input type="radio" name="lt" onclick="findOTD();">Transfer $120</input><br>
+              <input type="radio" name="lt" onclick="findOTD();">Other</input><br>
+              $<input type="number" name="other-lt"></input>
+            </span></span>
+        </div>
+        <div class="row">
+          <span class="left">OTD:</span><span class="right">$<h2 id=otd-total>XXX.XX</h2></span>
+        </div>
+      </form>
+
+      <!-- Visible in calculate price mode -->
+      <form id="price-form">
+        <div class="row">
+          <span class="left">OTD</span><span class="right">$<input type="number" name="otd"/></span>
+        </div>
+        <div class="row">
+          <span class="left">LT:</span><span class="right">
+            <span class="radiobox">
+              <input type="radio" name="lt" onclick="findPrice();">New $196</input><br>
+              <input type="radio" name="lt" onclick="findPrice();">Transfer $120</input><br>
+              <input type="radio" name="lt" onclick="findPrice();">Other</input><br>
+              $<input type="number" name="other-lt"></input>
+            </span></span>
+        </div>
+        <div class="row">
+          <span class="left">Subtotal:</span><span class="right">$<h3 id=price-subtotal1>XXX.XX</h3></span>
+        </div>
+        <div class="row">
+          <span class="left">Tax:</span><span class="right">
+            <span class="radiobox">
+              <input type="radio" name="tax" onclick="findPrice();">Dupage 7.00%</input><br>
+              <input type="radio" name="tax" onclick="findPrice();">Cook 8.00%</input><br>
+              <input type="radio" name="tax" onclick="findPrice();">Chicago 9.25%</input><br>
+              <input type="radio" name="tax" onclick="findPrice();">Other</input><br>
+              <input type="number" name="other-percent">%</input>
+            </span></span>
+        </div>
+        <div class="row">
+          <span class="left">Tax:</span><span class="right">$<h3 id=price-tax>XXX.XX</h3></span>
+        </div>
+        <div class="row">
+          <span class="left">Trade:</span><span class="right">$<input type="number" name="trade"></span>
+        </div>
+        <div class="row">
+          <span class="left">Subtotal:</span><span class="right">$<h3 id=price-subtotal2>XXX.XX</h3></span>
+        </div>
+        <div class="row">
+          <span class="left">Doc:</span><span class="right">$<input type="number" name="doc" value="204.81"></span>
+        </div>
+        <div class="row">
+          <span class="left">Total:</span><span class="right">$<h2 id=price-total>XXX.XX</h2></span>
+        </div>
+      </form>
     </div>
   </body>
   <script src="script.js"></script>
