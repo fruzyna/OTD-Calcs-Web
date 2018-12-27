@@ -4,23 +4,32 @@ body {
 
 #body {
   margin: auto;
-  width: 250px;
-}
-
-#calcprice {
-  margin: 0 auto;
-}
-
-#calcotd {
-  margin: 0 auto;
+  width: 480px;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,0.12);
 }
 
 #titlebar {
   height: 50px;
-  vertical-align: middle;
+  margin: auto;
+  background-color: #00798c;
+}
+
+#title {
+  line-height: 50px;
+  margin: 0px;
 }
 
 #dropbar {
+  margin: auto;
+}
+
+.tab {
+  width: 240px;
+  line-height: 30px;
+  text-align: center;
+  display: inline-block;
+  background-color: #a0c1d1;
 }
 
 #header {
@@ -30,4 +39,24 @@ body {
 
 h2, h3 {
   display: inline;
+}
+
+.row {
+  padding: 10px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  display: block;
+  text-align: right;
+}
+
+.radiobox {
+  margin-left: auto;
+  margin-right: 0px;
+  display: inline-block;
+  text-align: left;
 }
