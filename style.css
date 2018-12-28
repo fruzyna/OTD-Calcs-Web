@@ -22,6 +22,7 @@ body {
 
 #dropbar {
   margin: auto;
+  margin-top: 16px;
 }
 
 .tab {
