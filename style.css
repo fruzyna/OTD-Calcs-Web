@@ -4,7 +4,7 @@ body {
 
 #body {
   margin: auto;
-  width: 480px;
+  width: 360px;
   border-radius: 10px;
   background-color: rgba(0,0,0,0.12);
 }
@@ -22,12 +22,13 @@ body {
 
 #dropbar {
   margin: auto;
-  margin-top: 16px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  line-height: 40px;
 }
 
 .tab {
   width: 240px;
-  line-height: 30px;
   text-align: center;
   display: inline-block;
   background-color: #a0c1d1;
@@ -35,7 +36,6 @@ body {
 
 #header {
   text-align: center;
-  margin-bottom: 16px;
 }
 
 h2, h3 {
