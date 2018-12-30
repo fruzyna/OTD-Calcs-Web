@@ -50,8 +50,13 @@ function start()
   });
 }
 
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-  document.body.style.width = '480px';
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
+{
+  var viewport = document.querySelector('meta[name="viewport"]');
+  if (viewport)
+  {
+    viewport.content = "width=480";
+  }
 }
 
 // prepares otd mode
