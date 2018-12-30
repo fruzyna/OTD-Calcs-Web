@@ -25,6 +25,9 @@ function start()
   form.elements["other-lt"].addEventListener('input', function (evt) {
     findOTD();
   });
+  form.elements["payoff"].addEventListener('input', function (evt) {
+    findOTD();
+  });
 
   var form = document.getElementById("price-form");
   form.elements["otd"].addEventListener('input', function (evt) {
@@ -42,6 +45,15 @@ function start()
   form.elements["other-lt"].addEventListener('input', function (evt) {
     findPrice();
   });
+  form.elements["payoff"].addEventListener('input', function (evt) {
+    findPrice();
+  });
+}
+
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+  document.body.style.width = '480px';
+  document.body.style.marginLeft = 'auto';
+  document.body.style.marginRight = 'auto';
 }
 
 // prepares otd mode
@@ -70,8 +82,14 @@ function findPrice()
   var otd = parseFloat(form.elements["otd"].value);
   var trade = parseFloat(form.elements["trade"].value);
   var doc = parseFloat(form.elements["doc"].value);
+  var payoff = parseFloat(form.elements["payoff"].value);
   var ltRadios = form.elements["lt"];
   var taxRadios = form.elements["tax"];
+
+  if(isNaN(payoff))
+  {
+    payoff = 0
+  }
 
   // determines which lt radio button is selected
   var i;
@@ -100,7 +118,7 @@ function findPrice()
   }
 
   // calculates and displays the first subtotal
-  var subtotal1 = otd - lt;
+  var subtotal1 = otd - lt - payoff;
   document.getElementById("price-subtotal1").innerHTML = round(subtotal1, 2);
 
   // determines which tax radio button is selected
@@ -166,6 +184,7 @@ function findOTD()
   var price = parseFloat(form.elements["price"].value);
   var doc = parseFloat(form.elements["doc"].value);
   var trade = parseFloat(form.elements["trade"].value);
+  var payoff = parseFloat(form.elements["payoff"].value);
   var taxRadios = form.elements["tax"];
   var ltRadios = form.elements["lt"];
 
@@ -239,7 +258,12 @@ function findOTD()
       break;
   }
 
+  if(isNaN(payoff))
+  {
+    payoff = 0
+  }
+
   // calculates and displays the total
-  var total = subtotal * tax + lt;
+  var total = subtotal * tax + lt + payoff;
   document.getElementById("otd-total").innerHTML = round(total, 2);
 }
