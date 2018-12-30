@@ -52,8 +52,6 @@ function start()
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
   document.body.style.width = '480px';
-  document.body.style.marginLeft = 'auto';
-  document.body.style.marginRight = 'auto';
 }
 
 // prepares otd mode
