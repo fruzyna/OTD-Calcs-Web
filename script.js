@@ -108,11 +108,11 @@ function findPrice()
   {
     case 0:
       // new
-      lt = 196;
+      lt = 251;
       break;
     case 1:
       // transfer
-      lt = 120;
+      lt = 175;
       break;
     case 2:
       //other
@@ -249,11 +249,11 @@ function findOTD()
   {
     case 0:
       // new
-      lt = 196;
+      lt = 251;
       break;
     case 1:
       // transfer
-      lt = 120;
+      lt = 175;
       break;
     case 2:
       // other
