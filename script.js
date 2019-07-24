@@ -1,6 +1,32 @@
 // colors for tabs
-var selected = '#edae49';
+var selected   = '#edae49';
 var unselected = '#d81e5b';
+
+// taxes
+var dupage  = 0.0700;
+var cook    = 0.0800;
+var chicago = 0.0925;
+
+// plate fees
+var newPlate = 251;
+var transfer = 175;
+
+// doc fee
+var doc = 204.81;
+
+// replace all string
+String.prototype.replaceAll = function(search, replacement) {
+  var target = this;
+  return target.split(search).join(replacement);
+};
+
+// replace placeholders in html document
+document.body.innerHTML = document.body.innerHTML.replaceAll("[[DUPAGE]]",   (dupage * 100).toFixed(2))
+document.body.innerHTML = document.body.innerHTML.replaceAll("[[COOK]]",     (cook * 100).toFixed(2))
+document.body.innerHTML = document.body.innerHTML.replaceAll("[[CHICAGO]]",  (chicago * 100).toFixed(2))
+document.body.innerHTML = document.body.innerHTML.replaceAll("[[NEW]]",      newPlate)
+document.body.innerHTML = document.body.innerHTML.replaceAll("[[TRANSFER]]", transfer)
+document.body.innerHTML = document.body.innerHTML.replaceAll("[[DOC]]",      doc)
 
 start();
 function start()
@@ -108,11 +134,11 @@ function findPrice()
   {
     case 0:
       // new
-      lt = 251;
+      lt = transfer;
       break;
     case 1:
       // transfer
-      lt = 175;
+      lt = newPlate;
       break;
     case 2:
       //other
@@ -137,15 +163,15 @@ function findPrice()
   {
     case 0:
       // dupage
-      tax += 0.0700;
+      tax += dupage;
       break;
     case 1:
       // cook
-      tax += 0.0800;
+      tax += cook;
       break;
     case 2:
       // city
-      tax += 0.0925;
+      tax += chicago;
       break;
     case 3:
       // other
@@ -209,15 +235,15 @@ function findOTD()
   {
     case 0:
       // dupage
-      tax += 0.0700;
+      tax += dupage;
       break;
     case 1:
       // cook
-      tax += 0.0800;
+      tax += cook;
       break;
     case 2:
       // city
-      tax += 0.0925;
+      tax += chicago;
       break;
     case 3:
       // other
@@ -249,11 +275,11 @@ function findOTD()
   {
     case 0:
       // new
-      lt = 251;
+      lt = newPlate;
       break;
     case 1:
       // transfer
-      lt = 175;
+      lt = transfer;
       break;
     case 2:
       // other

@@ -24,7 +24,7 @@
           <span class="left">Price:</span><span class="right">$<input type="number" name="price"></span>
         </div>
         <div class="row">
-          <span class="left">Doc:</span><span class="right">$<input type="number" name="doc" value="204.81"></span>
+          <span class="left">Doc:</span><span class="right">$<input type="number" name="doc" value="[[DOC]]"></span>
         </div>
         <div class="row">
           <span class="left">Trade:</span><span class="right">$<input type="number" name="trade"></span>
@@ -35,9 +35,9 @@
         <div class="row">
           <span class="left">Tax:</span><span class="right">
             <span class="radiobox">
-              <input type="radio" name="tax" onclick="findOTD();">Dupage 7.00%</input><br>
-              <input type="radio" name="tax" onclick="findOTD();">Cook 8.00%</input><br>
-              <input type="radio" name="tax" onclick="findOTD();">Chicago 9.25%</input><br>
+              <input type="radio" name="tax" onclick="findOTD();">Dupage [[DUPAGE]]%</input><br>
+              <input type="radio" name="tax" onclick="findOTD();">Cook [[COOK]]%</input><br>
+              <input type="radio" name="tax" onclick="findOTD();">Chicago [[CHICAGO]]%</input><br>
               <input type="radio" name="tax" onclick="findOTD();">Other</input><br>
               <input type="number" name="other-percent">%</input>
             </span></span>
@@ -48,8 +48,8 @@
         <div class="row">
           <span class="left">LT:</span><span class="right">
             <span class="radiobox">
-              <input type="radio" name="lt" onclick="findOTD();">New $251</input><br>
-              <input type="radio" name="lt" onclick="findOTD();">Transfer $175</input><br>
+              <input type="radio" name="lt" onclick="findOTD();">New $[[NEW]]</input><br>
+              <input type="radio" name="lt" onclick="findOTD();">Transfer $[[TRANSFER]]</input><br>
               <input type="radio" name="lt" onclick="findOTD();">Other</input><br>
               $<input type="number" name="other-lt"></input>
             </span></span>
@@ -73,8 +73,8 @@
         <div class="row">
           <span class="left">LT:</span><span class="right">
             <span class="radiobox">
-              <input type="radio" name="lt" onclick="findPrice();">New $251</input><br>
-              <input type="radio" name="lt" onclick="findPrice();">Transfer $175</input><br>
+              <input type="radio" name="lt" onclick="findPrice();">New $[[NEW]]</input><br>
+              <input type="radio" name="lt" onclick="findPrice();">Transfer $[[TRANSFER]]</input><br>
               <input type="radio" name="lt" onclick="findPrice();">Other</input><br>
               $<input type="number" name="other-lt"></input>
             </span></span>
@@ -85,9 +85,9 @@
         <div class="row">
           <span class="left">Tax:</span><span class="right">
             <span class="radiobox">
-              <input type="radio" name="tax" onclick="findPrice();">Dupage 7.00%</input><br>
-              <input type="radio" name="tax" onclick="findPrice();">Cook 8.00%</input><br>
-              <input type="radio" name="tax" onclick="findPrice();">Chicago 9.25%</input><br>
+              <input type="radio" name="tax" onclick="findPrice();">Dupage [[DUPAGE]]%</input><br>
+              <input type="radio" name="tax" onclick="findPrice();">Cook [[COOK]]%</input><br>
+              <input type="radio" name="tax" onclick="findPrice();">Chicago [[CHICAGO]]%</input><br>
               <input type="radio" name="tax" onclick="findPrice();">Other</input><br>
               <input type="number" name="other-percent">%</input>
             </span></span>
@@ -102,7 +102,7 @@
           <span class="left">Subtotal:</span><span class="right">$<h3 id=price-subtotal2>XXX.XX</h3></span>
         </div>
         <div class="row">
-          <span class="left">Doc:</span><span class="right">$<input type="number" name="doc" value="204.81"></span>
+          <span class="left">Doc:</span><span class="right">$<input type="number" name="doc" value="[[DOC]]"></span>
         </div>
         <div class="row">
           <span class="left">Total:</span><span class="right">$<h2 id=price-total>XXX.XX</h2></span>
