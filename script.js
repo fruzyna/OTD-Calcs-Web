@@ -31,51 +31,30 @@ document.body.innerHTML = document.body.innerHTML.replaceAll("[[DOC]]",      doc
 start();
 function start()
 {
-  //opens in otd mode
+  // opens in otd mode
   otd();
 
   // sets listeners to update everytime a value is changed
   var form = document.getElementById("otd-form");
-  form.elements["price"].addEventListener('input', function (evt) {
-    findOTD();
-  });
-  form.elements["doc"].addEventListener('input', function (evt) {
-    findOTD();
-  });
-  form.elements["trade"].addEventListener('input', function (evt) {
-    findOTD();
-  });
-  form.elements["other-percent"].addEventListener('input', function (evt) {
-    findOTD();
-  });
-  form.elements["other-lt"].addEventListener('input', function (evt) {
-    findOTD();
-  });
-  form.elements["payoff"].addEventListener('input', function (evt) {
-    findOTD();
-  });
+  form.elements["price"].addEventListener('input', findOTD);
+  form.elements["rebate"].addEventListener('input', findOTD);
+  form.elements["doc"].addEventListener('input', findOTD);
+  form.elements["trade"].addEventListener('input', findOTD);
+  form.elements["other-percent"].addEventListener('input', findOTD);
+  form.elements["other-lt"].addEventListener('input', findOTD);
+  form.elements["payoff"].addEventListener('input', findOTD);
 
   var form = document.getElementById("price-form");
-  form.elements["otd"].addEventListener('input', function (evt) {
-    findPrice();
-  });
-  form.elements["doc"].addEventListener('input', function (evt) {
-    findPrice();
-  });
-  form.elements["trade"].addEventListener('input', function (evt) {
-    findPrice();
-  });
-  form.elements["other-percent"].addEventListener('input', function (evt) {
-    findPrice();
-  });
-  form.elements["other-lt"].addEventListener('input', function (evt) {
-    findPrice();
-  });
-  form.elements["payoff"].addEventListener('input', function (evt) {
-    findPrice();
-  });
+  form.elements["otd"].addEventListener('input', findPrice);
+  form.elements["doc"].addEventListener('input', findPrice);
+  form.elements["trade"].addEventListener('input', findPrice);
+  form.elements["other-percent"].addEventListener('input', findPrice);
+  form.elements["other-lt"].addEventListener('input', findPrice);
+  form.elements["payoff"].addEventListener('input', findPrice);
+  form.elements["rebate"].addEventListener('input', findPrice);
 }
 
+// adjust for mobile
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
 {
   var viewport = document.querySelector('meta[name="viewport"]');
@@ -103,6 +82,19 @@ function price()
   document.getElementById("price-tab").style.backgroundColor = selected;
 }
 
+// sets the text of an element to a value or $XXX.XX
+function setValue(id, value)
+{
+  if(isNaN(value))
+  {
+    document.getElementById(id).innerHTML = "XXX.XX";
+  }
+  else
+  {
+    document.getElementById(id).innerHTML = round(value, 2);
+  }
+}
+
 // calulates the price
 function findPrice()
 {
@@ -111,6 +103,7 @@ function findPrice()
   var otd = parseFloat(form.elements["otd"].value);
   var trade = parseFloat(form.elements["trade"].value);
   var doc = parseFloat(form.elements["doc"].value);
+  var rebate = parseFloat(form.elements["rebate"].value);
   var payoff = parseFloat(form.elements["payoff"].value);
   var ltRadios = form.elements["lt"];
   var taxRadios = form.elements["tax"];
@@ -118,6 +111,10 @@ function findPrice()
   if(isNaN(payoff))
   {
     payoff = 0
+  }
+  if(isNaN(rebate))
+  {
+    rebate = 0
   }
 
   // determines which lt radio button is selected
@@ -129,16 +126,16 @@ function findPrice()
       break;
     }
   }
-  var lt = 0;
+  var lt;
   switch(i)
   {
     case 0:
       // new
-      lt = transfer;
+      lt = newPlate;
       break;
     case 1:
       // transfer
-      lt = newPlate;
+      lt = transfer;
       break;
     case 2:
       //other
@@ -147,8 +144,8 @@ function findPrice()
   }
 
   // calculates and displays the first subtotal
-  var subtotal1 = otd - lt - payoff;
-  document.getElementById("price-subtotal1").innerHTML = round(subtotal1, 2);
+  var subtotal1 = otd + rebate - lt - payoff;
+  setValue("price-subtotal1", subtotal1);
 
   // determines which tax radio button is selected
   for(i = 0; i < taxRadios.length; i++)
@@ -158,45 +155,46 @@ function findPrice()
       break;
     }
   }
-  var tax = 1.0000;
+  var tax;
   switch(i)
   {
     case 0:
       // dupage
-      tax += dupage;
+      tax = dupage;
       break;
     case 1:
       // cook
-      tax += cook;
+      tax = cook;
       break;
     case 2:
       // city
-      tax += chicago;
+      tax = chicago;
       break;
     case 3:
       // other
       var other = parseFloat(form.elements["other-percent"].value);
       if(other >= 0.5)
       {
-        tax += other / 100;
+        tax = other / 100;
       }
       else {
-        tax += other;
+        tax = other;
       }
       break;
   }
 
   // calculates and displays the tax
-  var taxTotal = subtotal1 - (subtotal1 / tax);
-  document.getElementById("price-tax").innerHTML = round(taxTotal, 2);
+  var beforeTax = subtotal1 / (1 + tax);
+  var taxTotal = subtotal1 - beforeTax;
+  setValue("price-tax", taxTotal);
 
   // calculates and displays the second subtotal
-  var subtotal2 = subtotal1 / tax + trade;
-  document.getElementById("price-subtotal2").innerHTML = round(subtotal2, 2);
+  var subtotal2 = beforeTax + trade;
+  setValue("price-subtotal2", subtotal2);
 
   // calculates and displays the total
   var total = subtotal2 - doc;
-  document.getElementById("price-total").innerHTML = round(total, 2);
+  setValue("price-total", total);
 }
 
 // rounds a given value to a given number of decimal places
@@ -211,15 +209,29 @@ function findOTD()
   // get all inputs
   var form = document.getElementById("otd-form");
   var price = parseFloat(form.elements["price"].value);
+  var rebate = parseFloat(form.elements["rebate"].value);
   var doc = parseFloat(form.elements["doc"].value);
   var trade = parseFloat(form.elements["trade"].value);
   var payoff = parseFloat(form.elements["payoff"].value);
   var taxRadios = form.elements["tax"];
   var ltRadios = form.elements["lt"];
 
+  if(isNaN(rebate))
+  {
+    rebate = 0;
+  }
+  if(isNaN(trade))
+  {
+    trade = 0;
+  }
+
+  // calculates and displays the price after rebate
+  var afterRebate = price - rebate;
+  setValue("after-rebate", afterRebate);
+
   // calculates and displays the subtotal
   var subtotal = price + doc - trade;
-  document.getElementById("otd-subtotal").innerHTML = round(subtotal, 2);
+  setValue("otd-subtotal", subtotal);
 
   //determines which tax radio button is selected
   var i;
@@ -230,37 +242,37 @@ function findOTD()
       break;
     }
   }
-  var tax = 1.0000;
+  var tax;
   switch(i)
   {
     case 0:
       // dupage
-      tax += dupage;
+      tax = dupage;
       break;
     case 1:
       // cook
-      tax += cook;
+      tax = cook;
       break;
     case 2:
       // city
-      tax += chicago;
+      tax = chicago;
       break;
     case 3:
       // other
       var other = parseFloat(form.elements["other-percent"].value);
       if(other >= 0.5)
       {
-        tax += other / 100;
+        tax = other / 100;
       }
       else {
-        tax += other;
+        tax = other;
       }
       break;
   }
 
   // calculates and displays the tax
-  var taxTotal = subtotal * (tax - 1);
-  document.getElementById("otd-tax").innerHTML = round(taxTotal, 2);
+  var taxTotal = subtotal * tax;
+  setValue("otd-tax", taxTotal);
 
   // determines which lt radio button is selected
   for(i = 0; i < ltRadios.length; i++)
@@ -270,7 +282,7 @@ function findOTD()
       break;
     }
   }
-  var lt = 0;
+  var lt;
   switch(i)
   {
     case 0:
@@ -293,6 +305,6 @@ function findOTD()
   }
 
   // calculates and displays the total
-  var total = subtotal * tax + lt + payoff;
-  document.getElementById("otd-total").innerHTML = round(total, 2);
+  var total = subtotal * (1 + tax) + lt + payoff - rebate;
+  setValue("otd-total", total);
 }
