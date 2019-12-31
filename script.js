@@ -8,11 +8,11 @@ var cook    = 0.0800;
 var chicago = 0.0925;
 
 // plate fees
-var newPlate = 251;
+var newPlate = 301;
 var transfer = 175;
 
 // doc fee
-var doc = 204.81;
+var doc = 325;
 
 // replace all string
 String.prototype.replaceAll = function(search, replacement) {
