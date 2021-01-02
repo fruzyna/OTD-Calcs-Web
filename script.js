@@ -12,7 +12,7 @@ var newPlate = 301;
 var transfer = 175;
 
 // doc fee
-var doc = 325;
+var doc = 328.25;
 
 // replace all string
 String.prototype.replaceAll = function(search, replacement) {
