@@ -14,6 +14,12 @@ var transfer = 175;
 // doc fee
 var doc = 328.25;
 
+// register service workers for PWA
+if ('serviceWorker' in navigator)
+{
+  navigator.serviceWorker.register('pwa.js')
+}
+
 // replace all string
 String.prototype.replaceAll = function(search, replacement) {
   var target = this;
