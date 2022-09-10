@@ -8,11 +8,11 @@ var cook    = 0.0800;
 var chicago = 0.0925;
 
 // plate fees
-var newPlate = 301;
-var transfer = 175;
+var newPlate = 306;
+var transfer = 180;
 
 // doc fee
-var doc = 328.25;
+var doc = 359.24;
 
 // register service workers for PWA
 if ('serviceWorker' in navigator)
