@@ -5,7 +5,7 @@
     "scope": "/",
     "start_url": "/",
     "name": "OTD Calculator",
-    "short_name": "OTC Calc",
+    "short_name": "OTD Calc",
     "description": "Out the door price calculator.",
     "icons": [
         {
