@@ -1,4 +1,4 @@
-const CACHE_NAME = 'otd-220611'
+const CACHE_NAME = 'otd-220928'
 const CACHE_LIST = [
     // html files
     '/index.html',

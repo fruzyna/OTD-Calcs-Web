@@ -3,6 +3,7 @@
   <head>
     <title>OTD Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link href="print.css" media="print" rel="stylesheet">
     <link rel="manifest" href="manifest.webmanifest">
     <meta name="theme-color" content="#00798c"/>
     <link rel="apple-touch-icon" href="/config/icon-192x192.png">
@@ -127,6 +128,9 @@
           <span class="left">Total:</span><span class="right">$<h2 id=price-total>XXX.XX</h2></span>
         </div>
       </form>
+    </div>
+    <div id="tools">
+      <button type="button" id="print" onclick="print()">Print</button>
     </div>
   </body>
   <script src="script.js"></script>
