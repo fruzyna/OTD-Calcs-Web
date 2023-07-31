@@ -8,8 +8,8 @@ var cook    = 0.0800;
 var chicago = 0.0925;
 
 // plate fees
-var newPlate = 306;
-var transfer = 180;
+var newPlate = 316;
+var transfer = 190;
 
 // doc fee
 var doc = 382.26;
