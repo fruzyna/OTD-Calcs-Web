@@ -12,7 +12,7 @@ var newPlate = 316;
 var transfer = 190;
 
 // doc fee
-var doc = 382.26;
+var doc = 393.03;
 
 // register service workers for PWA
 if ('serviceWorker' in navigator)
