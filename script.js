@@ -12,7 +12,7 @@ var newPlate = 316; // passenger plate ($151)
 var transfer = 190; // transfer fee ($25)
 
 // doc fee
-var doc = 402.7;
+var doc = 412.63;
 
 // register service workers for PWA
 if ('serviceWorker' in navigator)
