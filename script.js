@@ -3,9 +3,9 @@ var selected   = '#edae49';
 var unselected = '#d81e5b';
 
 // taxes
-var dupage  = 0.0700;
-var cook    = 0.0800;
-var chicago = 0.0925;
+var dupage  = 0.0725;
+var cook    = 0.0825;
+var chicago = 0.0950;
 
 // plate fees + title ($165)
 var newPlate = 316; // passenger plate ($151)
