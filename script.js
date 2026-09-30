@@ -1,6 +1,6 @@
 // colors for tabs
 var selected   = '#edae49';
-var unselected = '#d81e5b';
+var unselected = '#ebd8bb';
 
 // taxes
 var dupage  = 0.0725;
