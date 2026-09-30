@@ -211,6 +211,7 @@ function findPrice()
   }
   var beforeTax = afterTax / (1 + tax)
   taxTotal += afterTax - beforeTax;
+  taxTotal = Math.round(taxTotal)
   setValue("price-tax", taxTotal);
 
   // calculates and displays the second subtotal
@@ -302,6 +303,7 @@ function findOTD()
   {
     taxTotal = (price + doc - 10000) * tax;
   }
+  taxTotal = Math.round(taxTotal);
   setValue("otd-tax", taxTotal);
 
   // determines which lt radio button is selected
